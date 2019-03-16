@@ -12,7 +12,8 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var pageControlConstraint: NSLayoutConstraint!
-    
+    private var scollViewIsDragging = false
+
     public var photos: [URL] = []
     public var captions: [String] = []
     public var imageContentMode = UIView.ContentMode.scaleAspectFit
@@ -25,13 +26,22 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let visiblePage = self.collectionView.contentOffset.x / self.collectionView.bounds.size.width
+        coordinator.animate(alongsideTransition: { _ in
+        }) { _ in
+            let newOffset = CGPoint(x: visiblePage * self.collectionView.bounds.size.width, y: self.collectionView.contentOffset.y)
+            self.collectionView.contentOffset = newOffset
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }
+    }
+    
     func makeImage(for url: URL) -> UIImage? {
         guard let photo = try? Data(contentsOf: url) else { return nil }
         guard let photoImage = UIImage(data: photo) else { return nil }
         return photoImage
     }
-    
-    var scollViewIsDragging = false
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scollViewIsDragging = true
