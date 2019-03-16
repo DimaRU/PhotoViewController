@@ -44,33 +44,31 @@
                                                 </imageView>
                                                 <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBB-SA-K7x" userLabel="caption bar">
                                                     <rect key="frame" x="0.0" y="254.5" width="375" height="27"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLZ-xQ-Ghi">
-                                                            <rect key="frame" x="173.5" y="5.5" width="28.5" height="13.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="GLZ-xQ-Ghi" firstAttribute="centerX" secondItem="MBB-SA-K7x" secondAttribute="centerX" id="Dat-Zn-Ur2"/>
-                                                        <constraint firstItem="GLZ-xQ-Ghi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MBB-SA-K7x" secondAttribute="leadingMargin" id="XF8-g3-xkB"/>
-                                                        <constraint firstItem="GLZ-xQ-Ghi" firstAttribute="bottom" secondItem="MBB-SA-K7x" secondAttribute="bottomMargin" id="Yz3-M2-z7H"/>
                                                         <constraint firstAttribute="height" constant="27" id="ftf-wz-WXt"/>
-                                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GLZ-xQ-Ghi" secondAttribute="trailing" id="sQ7-rH-kHU"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLZ-xQ-Ghi">
+                                                    <rect key="frame" x="173.5" y="260" width="28.5" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="MBB-SA-K7x" firstAttribute="leading" secondItem="fwZ-fc-LNN" secondAttribute="leading" id="6Ha-g3-BOU"/>
                                             <constraint firstAttribute="trailing" secondItem="MBB-SA-K7x" secondAttribute="trailing" id="6Ni-KH-gb8"/>
+                                            <constraint firstItem="GLZ-xQ-Ghi" firstAttribute="centerX" secondItem="fwZ-fc-LNN" secondAttribute="centerX" id="7Ja-DN-9nL"/>
                                             <constraint firstAttribute="bottom" secondItem="MBB-SA-K7x" secondAttribute="bottom" id="Bkf-ZO-QN2"/>
+                                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GLZ-xQ-Ghi" secondAttribute="trailing" id="f9m-cH-4gC"/>
+                                            <constraint firstItem="GLZ-xQ-Ghi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fwZ-fc-LNN" secondAttribute="leadingMargin" id="fIZ-tf-imH"/>
                                             <constraint firstItem="4f7-0Q-Qzt" firstAttribute="leading" secondItem="fwZ-fc-LNN" secondAttribute="leading" id="fKr-1C-f0T"/>
                                             <constraint firstAttribute="bottom" secondItem="4f7-0Q-Qzt" secondAttribute="bottom" id="ffk-6y-LTj"/>
                                             <constraint firstItem="4f7-0Q-Qzt" firstAttribute="top" secondItem="fwZ-fc-LNN" secondAttribute="top" id="jRp-1f-roa"/>
                                             <constraint firstAttribute="trailing" secondItem="4f7-0Q-Qzt" secondAttribute="trailing" id="pPs-oY-ayO"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="GLZ-xQ-Ghi" secondAttribute="bottom" id="yRu-cq-Wf3"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="captionLabel" destination="GLZ-xQ-Ghi" id="9zk-o2-twx"/>
