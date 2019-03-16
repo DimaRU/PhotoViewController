@@ -8,29 +8,14 @@
 
 import UIKit
 
-class PhotoViewController: UIViewController {
+class PhotoViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var pageControlConstraint: NSLayoutConstraint!
     
-    public var photos: [URL] = [
-        URL(string: "https://static.inaturalist.org/photos/99279/medium.jpg?1545393634")!,
-        URL(string: "https://static.inaturalist.org/photos/17415659/medium.jpg?1525460504")!,
-        URL(string: "https://static.inaturalist.org/photos/17415663/medium.jpg?1525460506")!,
-        URL(string: "https://static.inaturalist.org/photos/17415666/medium.jpg?1525460508")!,
-        URL(string: "https://static.inaturalist.org/photos/17415667/medium.jpg?1525460510")!,
-    ]
-    
-    public var captions: [String] = [
-        "caption 1",
-        "caption 2",
-        "caption 3",
-        "caption 4",
-        "caption 5",
-    ]
-    
+    public var photos: [URL] = []
+    public var captions: [String] = []
     public var imageContentMode = UIView.ContentMode.scaleAspectFit
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,12 +72,6 @@ extension PhotoViewController: UICollectionViewDataSource {
 extension PhotoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath.row)")
-    }
-}
-
-extension PhotoViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        
     }
 }
 
