@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PhotoViewController.swift
 //  PhotoViewController
 //
 //  Created by Dmitriy Borovikov on 15/03/2019.
@@ -11,8 +11,9 @@ import UIKit
 class PhotoViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var pageControlConstraint: NSLayoutConstraint!
     
-    var photos: [URL] = [
+    public var photos: [URL] = [
         URL(string: "https://static.inaturalist.org/photos/99279/medium.jpg?1545393634")!,
         URL(string: "https://static.inaturalist.org/photos/17415659/medium.jpg?1525460504")!,
         URL(string: "https://static.inaturalist.org/photos/17415663/medium.jpg?1525460506")!,
@@ -20,11 +21,23 @@ class PhotoViewController: UIViewController {
         URL(string: "https://static.inaturalist.org/photos/17415667/medium.jpg?1525460510")!,
     ]
     
+    public var captions: [String] = [
+        "caption 1",
+        "caption 2",
+        "caption 3",
+        "caption 4",
+        "caption 5",
+    ]
+    
+    public var imageContentMode = UIView.ContentMode.scaleAspectFit
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         pageControl.numberOfPages = photos.count
+        if captions.isEmpty {
+            pageControlConstraint.constant = 0
+        }
     }
     
     func makeImage(for url: URL) -> UIImage? {
@@ -34,6 +47,7 @@ class PhotoViewController: UIViewController {
     }
     
     var scollViewIsDragging = false
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scollViewIsDragging = true
     }
@@ -62,8 +76,10 @@ extension PhotoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.imageView.contentMode = .scaleAspectFit
-        cell.imageView.image = makeImage(for: photos[indexPath.row])
+        let caption = captions.count > indexPath.row ? captions[indexPath.row] : nil
+        cell.setup(image: makeImage(for: photos[indexPath.row]),
+                   caption: caption,
+                   contentMode: imageContentMode)
         return cell
     }
 }
