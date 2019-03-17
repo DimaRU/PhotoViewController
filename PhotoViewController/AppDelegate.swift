@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache { print("Done cache clearing") }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = PhotoViewController.instantiate()
         mainViewController.photos = photos

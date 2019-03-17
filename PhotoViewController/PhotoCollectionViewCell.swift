@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
@@ -35,9 +36,19 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setup(image: UIImage?, caption: String?, contentMode: UIView.ContentMode) {
+    override func prepareForReuse() {
+        image = nil
+    }
+    
+    func setup(url: URL, caption: String?, contentMode: UIView.ContentMode) {
         imageView.contentMode = contentMode
-        self.image = image
         self.caption = caption
+        imageView.kf.indicatorType = .custom(indicator: PhotoActivityIndicator())
+        imageView.kf.setImage(with: url, placeholder: nil)
+        { result in
+            if case .success(let value) = result {
+                self.blurredImageView.image = value.image
+            }
+        }
     }
 }

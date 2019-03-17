@@ -13,11 +13,11 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var pageControlConstraint: NSLayoutConstraint!
     private var scollViewIsDragging = false
-
+    
     public var photos: [URL] = []
     public var captions: [String] = []
     public var imageContentMode = UIView.ContentMode.scaleAspectFit
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pageControl.numberOfPages = photos.count
@@ -46,9 +46,6 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scollViewIsDragging = true
     }
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scollViewIsDragging = false
-    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scollViewIsDragging else { return }
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
@@ -60,6 +57,7 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     
     @IBAction func setPage(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
+        scollViewIsDragging = false
         collectionView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
     }
 }
@@ -72,16 +70,8 @@ extension PhotoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let caption = captions.count > indexPath.row ? captions[indexPath.row] : nil
-        cell.setup(image: makeImage(for: photos[indexPath.row]),
-                   caption: caption,
-                   contentMode: imageContentMode)
+        cell.setup(url: photos[indexPath.row], caption: caption, contentMode: imageContentMode)
         return cell
-    }
-}
-
-extension PhotoViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected: \(indexPath.row)")
     }
 }
 
