@@ -11,19 +11,27 @@ import UIKit
 class PhotoViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var pageControlConstraint: NSLayoutConstraint!
     private var scollViewIsDragging = false
+    private var autoscrollTimer: Timer?
     
     public var photos: [URL] = []
     public var captions: [String] = []
     public var imageContentMode = UIView.ContentMode.scaleAspectFit
     
+    deinit {
+        autoscrollTimer = nil
+    }
+
+    public func refreshData() {
+        pageControl.numberOfPages = photos.count
+        collectionView.reloadData()
+        startAutoscroll()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pageControl.numberOfPages = photos.count
-        if captions.isEmpty {
-            pageControlConstraint.constant = 0
-        }
+        startAutoscroll()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -37,15 +45,11 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
         }
     }
     
-    func makeImage(for url: URL) -> UIImage? {
-        guard let photo = try? Data(contentsOf: url) else { return nil }
-        guard let photoImage = UIImage(data: photo) else { return nil }
-        return photoImage
-    }
-    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scollViewIsDragging = true
+        stopAutoscroll()
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scollViewIsDragging else { return }
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
@@ -56,9 +60,35 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     }
     
     @IBAction func setPage(_ sender: UIPageControl) {
-        let indexPath = IndexPath(item: sender.currentPage, section: 0)
         scollViewIsDragging = false
+        stopAutoscroll()
+        moveToPage(sender.currentPage)
+    }
+    
+    private func moveToPage(_ page: Int) {
+        let indexPath = IndexPath(item: page, section: 0)
         collectionView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+    }
+    
+    private func startAutoscroll() {
+        guard autoscrollTimer == nil else { return }
+        autoscrollTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(nextPage), userInfo: nil, repeats: true)
+    }
+    
+    private func stopAutoscroll() {
+        autoscrollTimer?.invalidate()
+        autoscrollTimer = nil
+    }
+    
+    @objc private func nextPage() {
+        scollViewIsDragging = true
+        let nextPage = pageControl.currentPage + 1
+        if nextPage < pageControl.numberOfPages {
+            moveToPage(nextPage)
+        }
+        else {
+            moveToPage(0)
+        }
     }
 }
 
