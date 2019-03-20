@@ -14,7 +14,7 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     private var scollViewIsDragging = false
     private var autoscrollTimer: Timer?
     
-    public var photos: [URL] = []
+    public var photos: [Photo] = []
     public var captions: [String] = []
     public var imageContentMode = UIView.ContentMode.scaleAspectFit
     
@@ -100,7 +100,7 @@ extension PhotoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let caption = captions.count > indexPath.row ? captions[indexPath.row] : nil
-        cell.setup(url: photos[indexPath.row], caption: caption, contentMode: imageContentMode)
+        cell.setup(url: photos[indexPath.row].mediumUrl, caption: caption, contentMode: imageContentMode)
         return cell
     }
 }
@@ -108,5 +108,15 @@ extension PhotoViewController: UICollectionViewDataSource {
 extension PhotoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.frame.size
+    }
+}
+
+extension PhotoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected!")
+        stopAutoscroll()
+        let vc = FullScreenViewController()
+        vc.photo = photos[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

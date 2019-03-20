@@ -13,12 +13,12 @@ import Kingfisher
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    let photos: [URL] = [
-        URL(string: "https://static.inaturalist.org/photos/99279/medium.jpg?1545393634")!,
-        URL(string: "https://static.inaturalist.org/photos/17415659/medium.jpg?1525460504")!,
-        URL(string: "https://static.inaturalist.org/photos/17415663/medium.jpg?1525460506")!,
-        URL(string: "https://static.inaturalist.org/photos/17415666/medium.jpg?1525460508")!,
-        URL(string: "https://static.inaturalist.org/photos/17415667/medium.jpg?1525460510")!,
+    let photos: [Photo] = [
+        Photo(url: URL(string: "https://static.inaturalist.org/photos/99279/medium.jpg?1545393634")!),
+        Photo(url: URL(string: "https://static.inaturalist.org/photos/17415659/medium.jpg?1525460504")!),
+        Photo(url: URL(string: "https://static.inaturalist.org/photos/17415663/medium.jpg?1525460506")!),
+        Photo(url: URL(string: "https://static.inaturalist.org/photos/17415666/medium.jpg?1525460508")!),
+        Photo(url: URL(string: "https://static.inaturalist.org/photos/17415667/medium.jpg?1525460510")!),
         ]
     
     let captions: [String] = [
@@ -38,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainViewController = PhotoViewController.instantiate()
         mainViewController.photos = photos
         mainViewController.captions = captions
-        window?.rootViewController = mainViewController
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }
