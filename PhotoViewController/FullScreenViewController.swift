@@ -93,9 +93,11 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func handleSingleTap(recognizer: UITapGestureRecognizer) {
-        navigationController?.navigationBar.isHidden.toggle()
-        let isHidden = navigationController?.navigationBar.isHidden ?? true
-        scrollView.backgroundColor = isHidden ? .black : .white
+        guard let isHidden = navigationController?.navigationBar.isHidden else { return }
+        UIView.animate(withDuration: 0.1) {
+            self.navigationController?.navigationBar.isHidden = !isHidden
+            self.scrollView.backgroundColor = !isHidden ? .black : .white
+        }
         setNeedsStatusBarAppearanceUpdate()
     }
     
