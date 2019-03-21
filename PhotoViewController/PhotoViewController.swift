@@ -82,13 +82,11 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     
     @objc private func nextPage() {
         scollViewIsDragging = true
-        let nextPage = pageControl.currentPage + 1
-        if nextPage < pageControl.numberOfPages {
-            moveToPage(nextPage)
+        var nextPage = pageControl.currentPage + 1
+        if nextPage >= pageControl.numberOfPages {
+            nextPage = 0
         }
-        else {
-            moveToPage(0)
-        }
+        moveToPage(nextPage)
     }
 }
 

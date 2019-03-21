@@ -11,35 +11,39 @@ import Kingfisher
 
 class FullScreenViewController: UIViewController, UIScrollViewDelegate {
     
-    private var scrollView: UIScrollView!
-    private var imageView: UIImageView!
-    private var navigationBar: UINavigationBar!
-    
+    private let scrollView = UIScrollView()
+    private let imageView = UIImageView()
+    private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     var photo: Photo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.frame = view.bounds
+        scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.backgroundColor = .white
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(scrollView)
         scrollView.delegate = self
-        imageView = UIImageView()
         addGestureRecognizers()
-        navigationBar = navigationController?.navigationBar
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapDoneButton(_:)))
         navigationItem.rightBarButtonItem = doneItem
+        scrollView.addSubview(self.imageView)
 
-        print(photo.original.absoluteString)
-        imageView.kf.indicatorType = .custom(indicator: PhotoActivityIndicator())
+        activityIndicator.frame = view.bounds
+        activityIndicator.backgroundColor = .lightGray
+        scrollView.addSubview(activityIndicator)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        
         imageView.kf.setImage(with: photo.original) { result in
             if case .success = result {
+                self.activityIndicator.stopAnimating()
                 self.imageView.sizeToFit()
                 self.scrollView.contentSize = self.imageView.bounds.size
+                self.setZoomScale()
                 let yOffset = self.scrollView.frame.size.height - self.imageView.frame.size.height
                 self.scrollView.contentOffset = CGPoint(x: 0, y: -yOffset / 2)
-                self.scrollView.addSubview(self.imageView)
             } else {
                 self.dismiss(animated: true)
             }
@@ -66,7 +70,6 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
         let horizontalPadding = imageSize.width < scrollSize.width ? (scrollSize.width - imageSize.width) / 2 : 0
         
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
-        print("scrollView.contentInset:", scrollView.contentInset)
     }
     
     func setZoomScale() {
@@ -77,7 +80,6 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.minimumZoomScale = min(widthScale, heightScale)
         scrollView.zoomScale = scrollView.minimumZoomScale
-        print("Set zoom scale: ", scrollView.zoomScale, scrollView.minimumZoomScale)
     }
     
     func addGestureRecognizers() {
@@ -91,8 +93,9 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func handleSingleTap(recognizer: UITapGestureRecognizer) {
-        navigationBar.isHidden.toggle()
-        scrollView.backgroundColor = navigationBar.isHidden ? .black : .white
+        navigationController?.navigationBar.isHidden.toggle()
+        let isHidden = navigationController?.navigationBar.isHidden ?? true
+        scrollView.backgroundColor = isHidden ? .black : .white
         setNeedsStatusBarAppearanceUpdate()
     }
     

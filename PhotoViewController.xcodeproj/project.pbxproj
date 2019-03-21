@@ -16,7 +16,6 @@
 		0A17F8F6223D4BD600B71E66 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17F8F5223D4BD600B71E66 /* StoryboardInstantiable.swift */; };
 		0A3885B5223D8420003A63E8 /* PhotoActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3885B4223D8420003A63E8 /* PhotoActivityIndicator.swift */; };
 		0A60C3D0224234ED004EBE8D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A60C3CF224234ED004EBE8D /* Photo.swift */; };
-		0A60C3D22242BBB9004EBE8D /* FullScreenViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A60C3D12242BBB9004EBE8D /* FullScreenViewController.storyboard */; };
 		0A60C3D42242D53D004EBE8D /* FullScreenNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A60C3D32242D53D004EBE8D /* FullScreenNavigationViewController.swift */; };
 		0ACB700E22421E4D00C68A58 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB700D22421E4D00C68A58 /* FullScreenViewController.swift */; };
 		EAC0D7560C04B06AC6DEBBAA /* Pods_PhotoViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B1EF4A10184A508876EF78 /* Pods_PhotoViewController.framework */; };
@@ -34,7 +33,6 @@
 		0A17F8F5223D4BD600B71E66 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		0A3885B4223D8420003A63E8 /* PhotoActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoActivityIndicator.swift; sourceTree = "<group>"; };
 		0A60C3CF224234ED004EBE8D /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		0A60C3D12242BBB9004EBE8D /* FullScreenViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FullScreenViewController.storyboard; sourceTree = "<group>"; };
 		0A60C3D32242D53D004EBE8D /* FullScreenNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenNavigationViewController.swift; sourceTree = "<group>"; };
 		0ACB700D22421E4D00C68A58 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		812408D7BE905DAE11628A42 /* Pods-PhotoViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewController.debug.xcconfig"; path = "Target Support Files/Pods-PhotoViewController/Pods-PhotoViewController.debug.xcconfig"; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 			children = (
 				0A60C3CE22423432004EBE8D /* etc */,
 				0ACB700D22421E4D00C68A58 /* FullScreenViewController.swift */,
-				0A60C3D12242BBB9004EBE8D /* FullScreenViewController.storyboard */,
 				0A112894223C302A00ED96E2 /* PhotoViewController.swift */,
 				0A17F8F3223CFB5900B71E66 /* PhotoCollectionViewCell.swift */,
 				0A112896223C302A00ED96E2 /* PhotoViewController.storyboard */,
@@ -177,7 +174,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A60C3D22242BBB9004EBE8D /* FullScreenViewController.storyboard in Resources */,
 				0A11289D223C302B00ED96E2 /* LaunchScreen.storyboard in Resources */,
 				0A11289A223C302B00ED96E2 /* Assets.xcassets in Resources */,
 				0A112898223C302A00ED96E2 /* PhotoViewController.storyboard in Resources */,
