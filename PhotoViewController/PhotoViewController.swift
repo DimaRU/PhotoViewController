@@ -113,10 +113,10 @@ extension PhotoViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected!")
         stopAutoscroll()
         let vc = FullScreenViewController()
         vc.photo = photos[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        let nc = FullScreenNavigationViewController(rootViewController: vc)
+        present(nc, animated: true)
     }
 }
