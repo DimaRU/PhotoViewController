@@ -11,7 +11,7 @@ import UIKit
 class PhotoViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
-    private var scollViewIsDragging = false
+    private var enablePageControlPaging = false
     private var autoscrollTimer: Timer?
     
     public var photos: [Photo] = []
@@ -46,12 +46,19 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        scollViewIsDragging = true
         stopAutoscroll()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        enablePageControlPaging = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        enablePageControlPaging = false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard scollViewIsDragging else { return }
+        guard enablePageControlPaging else { return }
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) {
@@ -60,7 +67,6 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     }
     
     @IBAction func setPage(_ sender: UIPageControl) {
-        scollViewIsDragging = false
         stopAutoscroll()
         moveToPage(sender.currentPage)
     }
@@ -81,7 +87,6 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     }
     
     @objc private func nextPage() {
-        scollViewIsDragging = true
         var nextPage = pageControl.currentPage + 1
         if nextPage >= pageControl.numberOfPages {
             nextPage = 0
