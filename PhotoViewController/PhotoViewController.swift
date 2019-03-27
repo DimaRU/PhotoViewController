@@ -21,7 +21,7 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     deinit {
         autoscrollTimer = nil
     }
-
+    
     public func refreshData() {
         pageControl.numberOfPages = photos.count
         collectionView.reloadData()
@@ -31,7 +31,7 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         pageControl.numberOfPages = photos.count
-        startAutoscroll()
+        pageControl.clipsToBounds = true
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -49,12 +49,20 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
         stopAutoscroll()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        enablePageControlPaging = true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        enablePageControlPaging = false
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        enablePageControlPaging = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        enablePageControlPaging = true
+        startAutoscroll()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopAutoscroll()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -77,7 +85,8 @@ class PhotoViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func startAutoscroll() {
-        guard autoscrollTimer == nil else { return }
+        guard autoscrollTimer == nil,
+            pageControl.numberOfPages > 1 else { return }
         autoscrollTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(nextPage), userInfo: nil, repeats: true)
     }
     
