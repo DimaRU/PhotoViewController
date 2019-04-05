@@ -36,7 +36,7 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         
-        imageView.kf.setImage(with: photo.original) { result in
+        imageView.kf.setImage(with: photo.originalUrl) { result in
             if case .success = result {
                 self.activityIndicator.stopAnimating()
                 self.imageView.sizeToFit()
@@ -93,11 +93,9 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func handleSingleTap(recognizer: UITapGestureRecognizer) {
-        guard let isHidden = navigationController?.navigationBar.isHidden else { return }
-        UIView.animate(withDuration: 0.1) {
-            self.navigationController?.navigationBar.isHidden = !isHidden
-            self.scrollView.backgroundColor = !isHidden ? .black : .white
-        }
+        navigationController?.navigationBar.isHidden.toggle()
+        let isHidden = navigationController?.navigationBar.isHidden ?? true
+        scrollView.backgroundColor = isHidden ? .black : .white
         setNeedsStatusBarAppearanceUpdate()
     }
     

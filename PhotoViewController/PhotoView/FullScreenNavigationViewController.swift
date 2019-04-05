@@ -9,13 +9,7 @@
 import UIKit
 
 class FullScreenNavigationViewController: UINavigationController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return navigationBar.isHidden
     }
-
 }

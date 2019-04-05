@@ -73,11 +73,8 @@
 		0A112891223C302A00ED96E2 /* PhotoViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0AED256B2257815300127407 /* PhotoView */,
 				0A60C3CE22423432004EBE8D /* etc */,
-				0ACB700D22421E4D00C68A58 /* FullScreenViewController.swift */,
-				0A112894223C302A00ED96E2 /* PhotoViewController.swift */,
-				0A17F8F3223CFB5900B71E66 /* PhotoCollectionViewCell.swift */,
-				0A112896223C302A00ED96E2 /* PhotoViewController.storyboard */,
 				0A112899223C302B00ED96E2 /* Assets.xcassets */,
 				0A11289B223C302B00ED96E2 /* LaunchScreen.storyboard */,
 				0A11289E223C302B00ED96E2 /* Info.plist */,
@@ -88,13 +85,24 @@
 		0A60C3CE22423432004EBE8D /* etc */ = {
 			isa = PBXGroup;
 			children = (
-				0A60C3D32242D53D004EBE8D /* FullScreenNavigationViewController.swift */,
-				0A3885B4223D8420003A63E8 /* PhotoActivityIndicator.swift */,
 				0A112892223C302A00ED96E2 /* AppDelegate.swift */,
 				0A17F8F5223D4BD600B71E66 /* StoryboardInstantiable.swift */,
 				0A60C3CF224234ED004EBE8D /* Photo.swift */,
 			);
 			path = etc;
+			sourceTree = "<group>";
+		};
+		0AED256B2257815300127407 /* PhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				0A60C3D32242D53D004EBE8D /* FullScreenNavigationViewController.swift */,
+				0ACB700D22421E4D00C68A58 /* FullScreenViewController.swift */,
+				0A112894223C302A00ED96E2 /* PhotoViewController.swift */,
+				0A3885B4223D8420003A63E8 /* PhotoActivityIndicator.swift */,
+				0A17F8F3223CFB5900B71E66 /* PhotoCollectionViewCell.swift */,
+				0A112896223C302A00ED96E2 /* PhotoViewController.storyboard */,
+			);
+			path = PhotoView;
 			sourceTree = "<group>";
 		};
 		89D72CF549EF02F3696E5A4F /* Pods */ = {

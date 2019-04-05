@@ -23,5 +23,5 @@ extension Photo {
     var smallUrl: URL { return replaceUrl("small") }
     var thumbUrl: URL { return replaceUrl("thumb") }
     var largeUrl: URL { return replaceUrl("large") }
-    var original: URL { return replaceUrl("original") }
+    var originalUrl: URL { return replaceUrl("original") }
 }
