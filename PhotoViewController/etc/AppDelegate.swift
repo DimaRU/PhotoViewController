@@ -51,14 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Photo(url: URL(string: "https://static.inaturalist.org/photos/24457/medium.jpg?1444305648")!),
         ]
     
-    let captions: [String] = [
-        "caption 1",
-        "caption 2",
-        "caption 3",
-        "caption 4",
-        "caption 5",
-        ]
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let cache = ImageCache.default
         cache.clearMemoryCache()
@@ -66,8 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = PhotoViewController.instantiate()
-        mainViewController.photos = photos
-        mainViewController.captions = captions
+        mainViewController.photos = photos.map { PhotoViewController.Photo(previewUrl: $0.mediumUrl, fullSizeUrl: $0.originalUrl, caption: "Caption")}
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

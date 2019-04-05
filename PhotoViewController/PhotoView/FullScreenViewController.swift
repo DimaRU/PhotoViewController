@@ -14,7 +14,7 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
     private let scrollView = UIScrollView()
     private let imageView = UIImageView()
     private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-    var photo: Photo!
+    var photoUrl: URL!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class FullScreenViewController: UIViewController, UIScrollViewDelegate {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         
-        imageView.kf.setImage(with: photo.originalUrl) { result in
+        imageView.kf.setImage(with: photoUrl) { result in
             if case .success = result {
                 self.activityIndicator.stopAnimating()
                 self.imageView.sizeToFit()
