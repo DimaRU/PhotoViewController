@@ -133,7 +133,7 @@ extension PhotoViewController: UICollectionViewDelegate {
         guard let url = photos[indexPath.row].fullSizeUrl else { return }
         let vc = FullScreenViewController()
         vc.photoUrl = url
-        let nc = FullScreenNavigationViewController(rootViewController: vc)
+        let nc = UINavigationController(rootViewController: vc)
         present(nc, animated: true)
     }
 }
